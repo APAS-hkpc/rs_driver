@@ -283,6 +283,11 @@ inline bool DecoderRS80<T_PointCloud>::internDecodeMsopPkt(const uint8_t* packet
         setTimestamp(point, chan_ts);
         setRing(point, this->chan_angles_.toUserChan(chan));
 
+        setReturntype(point, pkt.header.wave_mode);
+        setAzimuth(point, angle_horiz_final);
+        setTime(point, chan_ts);
+        setDistance(point, distance);
+
         this->point_cloud_->points.emplace_back(point);
       }
       else if (!this->param_.dense_points)
@@ -294,6 +299,11 @@ inline bool DecoderRS80<T_PointCloud>::internDecodeMsopPkt(const uint8_t* packet
         setIntensity(point, 0);
         setTimestamp(point, chan_ts);
         setRing(point, this->chan_angles_.toUserChan(chan));
+
+        setReturntype(point, pkt.header.wave_mode);
+        setAzimuth(point, angle_horiz_final);
+        setTime(point, chan_ts);
+        setDistance(point, distance);
 
         this->point_cloud_->points.emplace_back(point);
       }

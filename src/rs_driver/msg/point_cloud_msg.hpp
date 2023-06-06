@@ -43,6 +43,7 @@ struct PointXYZI
   uint8_t intensity;
 };
 
+
 struct PointXYZIRT
 {
   float x;
@@ -51,7 +52,21 @@ struct PointXYZIRT
   uint8_t intensity;
   uint16_t ring;
   double timestamp;
+  uint8_t return_type;
+  float azimuth;
+  float distance;
+  uint32_t time;
 };
+
+// struct PointXYZIRT
+// {
+//   float x;
+//   float y;
+//   float z;
+//   uint8_t intensity;
+//   uint16_t ring;
+//   double timestamp;
+// };
 
 template <typename T_Point>
 class PointCloudT

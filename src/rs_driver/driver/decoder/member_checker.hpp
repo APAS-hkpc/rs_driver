@@ -51,6 +51,11 @@ DEFINE_MEMBER_CHECKER(intensity)
 DEFINE_MEMBER_CHECKER(ring)
 DEFINE_MEMBER_CHECKER(timestamp)
 
+DEFINE_MEMBER_CHECKER(return_type)
+DEFINE_MEMBER_CHECKER(azimuth)
+DEFINE_MEMBER_CHECKER(distance)
+DEFINE_MEMBER_CHECKER(time)
+
 #define RS_HAS_MEMBER(C, member) has_##member<C>::value
 
 template <typename T_Point>
@@ -123,3 +128,51 @@ inline typename std::enable_if<RS_HAS_MEMBER(T_Point, timestamp)>::type setTimes
   point.timestamp = value;
 }
 
+
+template <typename T_Point>
+inline typename std::enable_if<!RS_HAS_MEMBER(T_Point, z)>::type setReturntype(T_Point& point, const float& value)
+{
+}
+
+template <typename T_Point>
+inline typename std::enable_if<RS_HAS_MEMBER(T_Point, z)>::type setReturntype(T_Point& point, const float& value)
+{
+  point.return_type = value;
+}
+
+template <typename T_Point>
+inline typename std::enable_if<!RS_HAS_MEMBER(T_Point, intensity)>::type setAzimuth(T_Point& point,
+                                                                                      const uint8_t& value)
+{
+}
+
+template <typename T_Point>
+inline typename std::enable_if<RS_HAS_MEMBER(T_Point, intensity)>::type setAzimuth(T_Point& point,
+                                                                                     const uint8_t& value)
+{
+  point.azimuth = value;
+}
+
+template <typename T_Point>
+inline typename std::enable_if<!RS_HAS_MEMBER(T_Point, ring)>::type setDistance(T_Point& point, const uint16_t& value)
+{
+}
+
+template <typename T_Point>
+inline typename std::enable_if<RS_HAS_MEMBER(T_Point, ring)>::type setDistance(T_Point& point, const uint16_t& value)
+{
+  point.distance = value;
+}
+
+template <typename T_Point>
+inline typename std::enable_if<!RS_HAS_MEMBER(T_Point, timestamp)>::type setTime(T_Point& point,
+                                                                                      const double& value)
+{
+}
+
+template <typename T_Point>
+inline typename std::enable_if<RS_HAS_MEMBER(T_Point, timestamp)>::type setTime(T_Point& point,
+                                                                                     const double& value)
+{
+  point.time = value;
+}
